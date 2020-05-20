@@ -1,30 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>django blog</title>
-  </head>
-  <body>
-      <div>
-          <h1><a href="/">django blog</a></h1>
-      </div>
-      {% for post in posts %}
-        <div>
-            <p>published: {{ post.published_date }}</p>
-            <h2><a href="">{{ post.title }}</a></h2>
-            <p>{{post.text|linebreaksbr }}</p>
+{% extends 'blog/base.html'%}
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
+            </div>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            
         </div>
-      {% endfor %}
-      <!--<div>
-          <p>published : 2020/5/20</p>
-          <h2><a href="">my first post</a></h2>
-          <p>ajfdjfd fdajjf ajfajfjda dajffda;jfa</p>
-      </div>
-      <div>
-        <p>published : 2020/5/22</p>
-        <h2><a href="">my second post</a></h2>
-        <p>ajfdjfd fdajjf ajfajfjda dajffda;jfa</p>
-    </div>-->
-  </body>
-</html>
+    {% endfor %}
+{% endblock %}
+            
